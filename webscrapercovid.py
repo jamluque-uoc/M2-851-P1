@@ -15,7 +15,7 @@ type_file = "CSV"
 # Para mas palabras de busquedas incluir (+) en los espacios ejemplo covid+19
 words_search = "covid"
 
-# url de acceso para la realizacón del web-scraping
+# url de acceso para la realización del web-scraping
 domain = "https://datos.gob.es"
 url_list = "https://datos.gob.es/es/catalogo?theme_id=salud&publisher_display_name="+publisher+ \
            "&sort=metadata_created+desc&res_format_label="+type_file+ \

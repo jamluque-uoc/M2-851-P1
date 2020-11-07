@@ -9,21 +9,25 @@ import pandas as pd
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+# paramentros de busqueda
 publisher = "Generalitat+de+Catalunya"
 type_file = "CSV"
-# Para mas palabras de busquedas incluir (+) en los espacios covid+19
+# Para mas palabras de busquedas incluir (+) en los espacios ejemplo covid+19
 words_search = "covid"
 
+# url de acceso para la realizacón del web-scraping
 domain = "https://datos.gob.es"
 url_list = "https://datos.gob.es/es/catalogo?theme_id=salud&publisher_display_name="+publisher+ \
            "&sort=metadata_created+desc&res_format_label="+type_file+ \
            "&q="+words_search+ \
            "&_publisher_display_name_limit=0"
 
+# path de fichero csv
 currentDir = os.path.dirname(__file__)
 filename = "gob_dataset.csv"
 filePath = os.path.join(currentDir, filename)
 
+# cabecera del fichero csv
 header_list = ['title', 'publish', 'entity', 'license_type', 'url_csv',\
                'tags', 'creation_date', 'update_date', 'insert_date_time']
 
@@ -32,15 +36,18 @@ header_list = ['title', 'publish', 'entity', 'license_type', 'url_csv',\
 # 'desc_long', 'url_csv', 'tags', 'creation_date', 'update_date', 'insert_date_time']
 
 
+# función para la limpieza de salto de linea y espacios en blanco
 def _clear_salto_linea(word):
     word = word.replace("\n", "")
     return word.strip()
 
 
+# funcion de eliminación en url de dataset extraido
 def _replace_word(word):
     return word.replace('?accessType=DOWNLOAD', '')
 
 
+# función para la conexion con la url y extracción del html
 def _connect_url_bs4(url_con):
     page = requests.get(url_con, verify=False)
     html_page = page.content
@@ -48,6 +55,7 @@ def _connect_url_bs4(url_con):
     return bs
 
 
+# función para la creación del fichero csv
 def _write_file_csv(rows_all):
     with open(filePath, 'w', newline='\n') as csvFile:
         writer = csv.writer(csvFile, delimiter='|')
@@ -56,15 +64,18 @@ def _write_file_csv(rows_all):
             writer.writerow(line)
 
 
+# función de lectura de fichero csv por medio de la libreria pandas
 def _read_csv_pandas():
     return pd.read_csv(filePath, delimiter='|')
 
 
+# función de lectura de fichero csv por medio de url
 def _read_csv_pandas_url(url):
     s = requests.get(url).content
     return pd.read_csv(io.StringIO(s.decode('utf-8')))
 
 
+# función de lectura de fichero csv
 def _read_csv_test():
     print("\n TEST read CSV")
     with open(filePath, "r", newline='\n') as f:
@@ -73,6 +84,7 @@ def _read_csv_test():
             print(line)
 
 
+# función de carga para realizar el web-scraping
 def _load_web_scraping():
     soup = _connect_url_bs4(url_list)
     table = soup.findAll('li', attrs={'class': 'dataset-item dge-list--elm'})
@@ -161,14 +173,16 @@ def _load_web_scraping():
         rows_all.append(list_of_rows)
     return rows_all
 
-
+# llamada a la función de carga del web-scraping y creación del csv
 _write_file_csv(_load_web_scraping())
 
+# lectura del fichero de csv por pandas a dataframe
 df = _read_csv_pandas()
 print(df)
 print(df.head())
 print(df.tail())
 
+# lectura de dataset extraido del csv del web-scarping
 df_url = _read_csv_pandas_url(df.url_csv[0])
 print(df_url)
 

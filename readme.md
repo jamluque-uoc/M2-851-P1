@@ -6,14 +6,14 @@
     Muchas veces se tiene la problemática que para acceder a dataset de los sitios web que publican,
     tienes que ir al sitio y descargarlo
     Realizar un web scraping sobre la web -> datos.gob.es/es/catalogo 
-    con parametros de busqueda sobre la url para acceder a los diferentes dataset
+    con parametros de búsqueda sobre la url para acceder a los diferentes dataset
     tipificados que contiene el catalogo de la web
 
 ## Objetivo
-    Pro la problematica presentada en la introducción, se pretende crear un dataset 
-    que aglutine el conjunto de dataset accesibles por una busqueda concreta.
+    Por la problemática presentada en la introducción, se pretende crear un dataset 
+    que aglutine el conjunto de dataset accesibles por una búsqueda concreta.
     El objetivo que se pretende es tener un dataset actualizado de las ultimas publicaciones
-    por los criterios de busqueda y de cada uno de las lineas de respuesta acceder al
+    por los criterios de busqueda y de cada uno de las líneas de respuesta acceder al
     dataset en csv para su consulta o descarga.
     
 ## Descripción

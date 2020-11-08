@@ -4,7 +4,7 @@
 
 ## Introducción
     Muchas veces se tiene la problemática que para acceder a dataset de los sitios web que publican,
-    tienes que ir al sitio y descargarlo
+    se tiene que ir al sitio y descargarlo manualmente.
     Realizar un web scraping sobre la web -> datos.gob.es/es/catalogo 
     con parametros de búsqueda sobre la url para acceder a los diferentes dataset
     tipificados que contiene el catalogo de la web
